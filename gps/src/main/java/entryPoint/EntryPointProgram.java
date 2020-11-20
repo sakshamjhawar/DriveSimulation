@@ -20,6 +20,7 @@ public class EntryPointProgram {
 		Parser parse = new Parser();
 		
 		//call method to parse our input files
+
 		List<SensorObj> dataArray = parse.inputFiles(canMessages, gpsTrack);
 		SimulatorToDisplaySensorData simulatorToDisplaySensorData = new SimulatorToDisplaySensorData();
 		simulatorToDisplaySensorData.displaySensorInformation(dataArray);
