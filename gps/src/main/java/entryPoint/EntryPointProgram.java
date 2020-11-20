@@ -20,7 +20,7 @@ public class EntryPointProgram {
 		//call method to parse our input files
 		parse.inputFiles(canMessages, gpsTrack);
 		
-//		System.out.println(canMessages);
+		System.out.println(canMessages);
 //		System.out.println(gpsTrack);
 	}
 
