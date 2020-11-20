@@ -19,7 +19,7 @@ public class Parser {
 	private List<SensorObj> dataArray = new ArrayList<SensorObj>();
 	
 	//base function to call subsequent functions
-	public void inputFiles(String canMessages, String gpsTrack) {
+	public List<SensorObj> inputFiles(String canMessages, String gpsTrack) {
 		
 		//first parsing can messages
 		readAndParseCanMessages(canMessages);
@@ -29,6 +29,8 @@ public class Parser {
 		sortTheListAsPerTime();
 		//displaying the data and writing it to output file
 		displayData();
+		
+		return dataArray;
 	}
 	
 	private void displayData() {
@@ -59,7 +61,7 @@ public class Parser {
 				
 				//outputing the data on console
 				
-				System.out.print(data.toString());
+//				System.out.print(data.toString());
 				//writing the data to file
 				writer.write(data.toString());
 			}

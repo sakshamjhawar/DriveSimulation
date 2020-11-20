@@ -1,5 +1,7 @@
 package entryPoint;
 
+import java.util.List;
+
 public class EntryPointProgram {
 
 	public static void main(String[] args) {
@@ -18,10 +20,13 @@ public class EntryPointProgram {
 		Parser parse = new Parser();
 		
 		//call method to parse our input files
-		parse.inputFiles(canMessages, gpsTrack);
-		
+		List<SensorObj> dataArray = parse.inputFiles(canMessages, gpsTrack);
+		SimulatorToDisplaySensorData simulatorToDisplaySensorData = new SimulatorToDisplaySensorData();
+		simulatorToDisplaySensorData.displaySensorInformation(dataArray);
 //		System.out.println(canMessages);
 //		System.out.println(gpsTrack);
 	}
+
+//	Error: Could not find or load main class
 
 }
