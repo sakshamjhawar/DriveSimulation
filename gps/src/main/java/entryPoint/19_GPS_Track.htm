@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+    <!-- this file was created using the export function of u-center by u-blox AG, Switzerland. -->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <title>u-center generated Google Map</title>
+        <style type="text/css">
+            v\:* {
+                behavior:url(#default#VML);
+            }
+        </style>
+        <script type="text/javascript" src="http://maps.google.com/maps?v=2&file=api"></script>
+        <script type="text/javascript">
+        //<![CDATA[
+            function Format(v)
+            {
+                var s = "";
+                if (v < 0) { v = -v; s = "-"; }
+                var i = Math.floor(v);
+                var f = Math.floor((v-i)*1e6);
+                var fs = f.toString();
+                while (fs.length < 6)
+                    fs = "0" + fs;
+                return s + i.toString() + "." + fs;
+            }
+            function MouseMove(p)
+            {
+                window.status = "Lat: " + Format(p.lat()) + " Lon: " + Format(p.lng());
+            }
+            function Load()
+            {
+                if (GBrowserIsCompatible())
+                {
+                    var i;
+                    var j;
+                    _mSvgEnabled = true;
+                    _mSvgForced = true;
+
+                    // create map
+                    GDraggableObject.setDraggableCursor('crosshair');
+                    var map = new GMap2(document.getElementById("div"));
+                    GEvent.addListener(map, 'mousemove', MouseMove);
+                    map.addControl(new GLargeMapControl());
+                    map.addControl(new GScaleControl());
+                    map.addControl(new GMapTypeControl());
+                    map.addControl(new GOverviewMapControl());
+
+                    // track is a two dimensional array with lat/long points
+                    var t = [
+                     [  new GLatLng( 52.721103, 13.223500),
+                        new GLatLng( 52.721170, 13.223778),
+                        new GLatLng( 52.721235, 13.224058),
+                        new GLatLng( 52.721302, 13.224340),
+                        new GLatLng( 52.721368, 13.224623),
+                        new GLatLng( 52.721437, 13.224910),
+                        new GLatLng( 52.721505, 13.225198),
+                        new GLatLng( 52.721573, 13.225478),
+                        new GLatLng( 52.721639, 13.225752),
+                        new GLatLng( 52.721705, 13.226025),
+                        new GLatLng( 52.721772, 13.226307),
+                        new GLatLng( 52.721842, 13.226593),
+                        new GLatLng( 52.721918, 13.226883),
+                        new GLatLng( 52.722007, 13.227160),
+                        new GLatLng( 52.722113, 13.227414),
+                        new GLatLng( 52.722242, 13.227628),
+                        new GLatLng( 52.722390, 13.227803),
+                        new GLatLng( 52.722552, 13.227933),
+                        new GLatLng( 52.722722, 13.228020),
+                        new GLatLng( 52.722900, 13.228053),
+                        new GLatLng( 52.723078, 13.228037),
+                        new GLatLng( 52.723252, 13.227980),
+                        new GLatLng( 52.723422, 13.227892),
+                        new GLatLng( 52.723585, 13.227787),
+                        new GLatLng( 52.723745, 13.227680),
+                        new GLatLng( 52.723895, 13.227580),
+                        new GLatLng( 52.724025, 13.227495),
+                        new GLatLng( 52.724135, 13.227423),
+                        new GLatLng( 52.724225, 13.227375),
+                        new GLatLng( 52.724298, 13.227362),
+                        new GLatLng( 52.724358, 13.227377),
+                        new GLatLng( 52.724417, 13.227387),
+                        new GLatLng( 52.724470, 13.227372),
+                        new GLatLng( 52.724517, 13.227328),
+                        new GLatLng( 52.724553, 13.227262),
+                        new GLatLng( 52.724570, 13.227171),
+                        new GLatLng( 52.724565, 13.227075),
+                        new GLatLng( 52.724532, 13.226988),
+                        new GLatLng( 52.724478, 13.226932),
+                        new GLatLng( 52.724415, 13.226918),
+                        new GLatLng( 52.724352, 13.226948) ]
+                    ];
+
+                    // find bounding box
+                    var b = new GLatLngBounds;
+                    for (i = 0; i < t.length; i ++)
+                        for (j = 0; j < t[i].length; j ++)
+                            b.extend(t[i][j]);
+
+                    // create map fitted to the track
+                    var ne = b.getNorthEast();
+                    var sw = b.getSouthWest();
+                    var c = new GLatLng((ne.lat() + sw.lat())/2, (ne.lng() + sw.lng())/2);
+                    var z = map.getBoundsZoomLevel(b);
+                    map.setCenter(c, z, G_HYBRID_MAP);
+
+                    // draw the map
+                    i = t.length-1;
+                    map.addOverlay(new GMarker(t[i][t[i].length-1]));
+                    while (i >= 0)
+                    {
+                        map.addOverlay(new GPolyline(t[i],"#FF00FF",3,0.6));
+                        i --;
+                    }
+                    map.addOverlay(new GMarker(t[0][0]));
+                }
+            }
+        //]]>
+        </script>
+    </head>
+    <body onload="Load();" onunload="GUnload();" style="margin:0px 0px 0px 0px; overflow:hidden;">
+        <div id="div"  style="position:absolute; top:0px; left:0px; width:100%; height:100%;"></div>
+    </body>
+</html>
