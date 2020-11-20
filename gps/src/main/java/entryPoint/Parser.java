@@ -28,7 +28,9 @@ public class Parser {
 		//sorting all the data as per time
 		sortTheListAsPerTime();
 		//displaying the data and writing it to output file
-		displayData();
+//		displayData();
+		UIDesign graphicalInterface = new UIDesign();
+		graphicalInterface.display();
 	}
 	
 	private void displayData() {
