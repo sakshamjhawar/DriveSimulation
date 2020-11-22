@@ -95,12 +95,13 @@ public class UIDesign {
 							linearValues.setText(finalData.getUIArray().get(i));
 							String[] offsetFromLinear = finalData.getUIArray().get(i).split("\\s+");
 							if(finalData.getCurveData().get(0).getTimeOffset().equals(offsetFromLinear[0])) {
+								String speed = finalData.getCurveData().get(0).isspeedflag() == true ? "High Speed" : "Low Speed";
 								if(finalData.getCurveData().get(0).isDirection() == true) {
-									curvePrompt.setText("Left Curve Detected");
+									curvePrompt.setText(speed+" Left Curve Detected!!");
 									finalData.getCurveData().remove(0);
 								}
 								else {
-									curvePrompt.setText("Right Curve Detected");
+									curvePrompt.setText(speed+" Right Curve Detected!!");
 									finalData.getCurveData().remove(0);
 								}
 							}
