@@ -1,5 +1,6 @@
 package entryPoint;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,15 +18,16 @@ public class UIDesign {
 
 //		this.dataArray = dataArray;
 		List<CurveInfo> curveData = finalData.getCurveData();
-//		for(CurveInfo curveInfo : curveData) {
-//
-//			System.out.println("TimeOffset: "+curveInfo.getTimeOffset());
-//			System.out.println("averageVehicleSpeed: "+curveInfo.getAverageVehicleSpeed());
-//			System.out.println("gpsLatLongStart: "+curveInfo.getGpsLatLongStart());
-//			System.out.println("gpsLatLongEnd: "+curveInfo.getGpsLatLongEnd());
-//			System.out.println("SpeedFlag: "+(curveInfo.isspeedflag() == true ? "highspeed" : "lowspeed"));
-//			System.out.println("Direction: "+(curveInfo.isDirection() == true ? "left" : "right"));
-//		}
+		for(CurveInfo curveInfo : curveData) {
+
+			System.out.println("TimeOffset: "+curveInfo.getTimeOffset());
+			System.out.println("averageVehicleSpeed: "+curveInfo.getAverageVehicleSpeed());
+			System.out.println("gpsLatLongStart: "+curveInfo.getGpsLatLongStart());
+			System.out.println("gpsLatLongEnd: "+curveInfo.getGpsLatLongEnd());
+			System.out.println("SpeedFlag: "+(curveInfo.isspeedflag() == true ? "highspeed" : "lowspeed"));
+			System.out.println("Direction: "+(curveInfo.isDirection() == true ? "left" : "right"));
+			System.out.println("----------------------------------------------------------------------");
+		}
 		JFrame mainWindow;
 		JLabel columnFormat;
 		mainWindow = new JFrame();
@@ -33,18 +35,24 @@ public class UIDesign {
 		JButton startButton = new JButton("Start Simulation");
 		JButton resetButton = new JButton("Reset");
 		JTextField linearValues = new JTextField();
+		JTextField curvePrompt = new JTextField();
 		columnFormat = new JLabel(
 				"Time offset   |   Speed   |   Steering Angle    |    Yaw Rate   |   Lateral Acc.   |   Longi Acc.   |   GPS Lat:Lon ");
+		JLabel curveDetection = new JLabel("Curve Status");
 
 		startButton.setBounds(150, 100, 200, 30);
 		resetButton.setBounds(400, 100, 200, 30);
 		columnFormat.setBounds(30, 200, 1000, 30);
 		linearValues.setBounds(30, 250, 770, 30);
+		curveDetection.setBounds(30, 300, 200, 30);
+		curvePrompt.setBounds(150, 300, 250, 30);
 
 		mainWindow.add(startButton);
 		mainWindow.add(resetButton);
 		mainWindow.add(columnFormat);
 		mainWindow.add(linearValues);
+		mainWindow.add(curvePrompt);
+		mainWindow.add(curveDetection);
 		mainWindow.setSize(800, 500);
 		mainWindow.setLayout(null);
 		mainWindow.setVisible(true);
@@ -85,7 +93,18 @@ public class UIDesign {
 								break;
 							}
 							linearValues.setText(finalData.getUIArray().get(i));
-							Thread.sleep(100);
+							String[] offsetFromLinear = finalData.getUIArray().get(i).split("\\s+");
+							if(finalData.getCurveData().get(0).getTimeOffset().equals(offsetFromLinear[0])) {
+								if(finalData.getCurveData().get(0).isDirection() == true) {
+									curvePrompt.setText("Left Curve Detected");
+									finalData.getCurveData().remove(0);
+								}
+								else {
+									curvePrompt.setText("Right Curve Detected");
+									finalData.getCurveData().remove(0);
+								}
+							}
+							Thread.sleep(1);
 						}
 						return null;
 					}
