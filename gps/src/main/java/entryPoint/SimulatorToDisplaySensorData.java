@@ -1,5 +1,6 @@
 package entryPoint;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimulatorToDisplaySensorData {
@@ -12,7 +13,9 @@ public class SimulatorToDisplaySensorData {
 	private String longAccel = "-";
 	private String gpsLatLong = "-";
 	
-	public void displaySensorInformation(List<SensorObj> dataArray) {
+	public List<String> displaySensorInformation(List<SensorObj> dataArray) {
+		
+		List<String> UIArray = new ArrayList<String>();
 		
 		System.out.println("Current Time"+"\t"+"Vehicle Speed"+"\t"+"SteerAngle"+
 				"\t"+"YawRate"+"\t"+"LatAccel"+"\t"+"LongAccel"+"\t"+"GPS Lat/Long");
@@ -39,6 +42,12 @@ public class SimulatorToDisplaySensorData {
 			System.out.println(currentTime+"\t"+vehicleSpeed+"\t"+steerAngle+
 					"\t"+yawRate+"\t"+latAccel+"\t"+longAccel+"\t"+gpsLatLong+"\r");
 			System.out.print("\r");
+			String s = currentTime+"\t"+vehicleSpeed+"\t"+steerAngle+
+					"\t"+yawRate+"\t"+latAccel+"\t"+longAccel+"\t"+gpsLatLong;
+			
+			UIArray.add(s);
+			
 		}
+		return UIArray;
 	}
 }

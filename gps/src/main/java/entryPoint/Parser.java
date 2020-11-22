@@ -30,7 +30,7 @@ public class Parser {
 		//displaying the data and writing it to output file
 //		displayData();
 		UIDesign graphicalInterface = new UIDesign();
-		graphicalInterface.display();
+		graphicalInterface.display(dataArray);
 		return dataArray;
 	}
 	
