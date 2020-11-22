@@ -64,6 +64,7 @@ public class SimulatorToDisplaySensorData {
 					} else {
 						curveDetected.setspeedflag(false);
 					}
+					curveDetected.setTimeOffsetEnd(currentTime);
 					curveData.add(curveDetected);
 					speedSum = 0F;
 					speedCounter = 0F;
@@ -89,6 +90,7 @@ public class SimulatorToDisplaySensorData {
 					} else {
 						curveDetected.setspeedflag(false);
 					}
+					curveDetected.setTimeOffsetEnd(currentTime);
 					curveData.add(curveDetected);
 					speedSum = 0F;
 					speedCounter = 0F;
@@ -123,6 +125,7 @@ public class SimulatorToDisplaySensorData {
 			} else {
 				curveDetected.setspeedflag(false);
 			}
+			curveDetected.setTimeOffsetEnd(currentTime);
 			curveData.add(curveDetected);
 			speedSum = 0F;
 			speedCounter = 0F;

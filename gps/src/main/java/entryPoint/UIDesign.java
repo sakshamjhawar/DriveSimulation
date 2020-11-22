@@ -21,6 +21,7 @@ public class UIDesign {
 		for(CurveInfo curveInfo : curveData) {
 
 			System.out.println("TimeOffset: "+curveInfo.getTimeOffset());
+			System.out.println("TimeOffsetEnd: "+curveInfo.getTimeOffsetEnd());
 			System.out.println("averageVehicleSpeed: "+curveInfo.getAverageVehicleSpeed());
 			System.out.println("gpsLatLongStart: "+curveInfo.getGpsLatLongStart());
 			System.out.println("gpsLatLongEnd: "+curveInfo.getGpsLatLongEnd());
