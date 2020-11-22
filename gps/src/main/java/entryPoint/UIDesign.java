@@ -37,16 +37,40 @@ public class UIDesign {
 		JButton resetButton = new JButton("Reset");
 		JTextField linearValues = new JTextField();
 		JTextField curvePrompt = new JTextField();
+		JTextField averageSpeed = new JTextField();
+		JTextField gpsStart = new JTextField();
+		JTextField gpsEnd = new JTextField();
+		JTextField speedTypeField = new JTextField();
+		JTextField curveTypeField = new JTextField();
+		
 		columnFormat = new JLabel(
 				"Time offset   |   Speed   |   Steering Angle    |    Yaw Rate   |   Lateral Acc.   |   Longi Acc.   |   GPS Lat:Lon ");
 		JLabel curveDetection = new JLabel("Curve Status");
+		JLabel lastCurve = new JLabel("Last Curve Stats :");
+		JLabel avgSpeedLabel = new JLabel("Average Speed :");
+		JLabel startPosition = new JLabel("Curve Start Position :");
+		JLabel endPosition = new JLabel("Curve End Position :");
+		JLabel speedTypeLabel = new JLabel("Speed Type : ");
+		JLabel curveTypeJLabel = new JLabel("Curve Type");
 
-		startButton.setBounds(150, 100, 200, 30);
-		resetButton.setBounds(400, 100, 200, 30);
-		columnFormat.setBounds(30, 200, 1000, 30);
-		linearValues.setBounds(30, 250, 770, 30);
-		curveDetection.setBounds(30, 300, 200, 30);
-		curvePrompt.setBounds(150, 300, 250, 30);
+		startButton.setBounds(150, 50, 200, 30);
+		resetButton.setBounds(400, 50, 200, 30);
+		columnFormat.setBounds(30, 100, 1000, 30);
+		linearValues.setBounds(30, 150, 770, 30);
+		curveDetection.setBounds(30,200,200,30);
+		curvePrompt.setBounds(150,200,250,30);
+		lastCurve.setBounds(30,250,250,40);
+		avgSpeedLabel.setBounds(50,300,300,40);
+		averageSpeed.setBounds(300,300,200,40);
+		startPosition.setBounds(50,340,200,40);
+		gpsStart.setBounds(300,340,200,40);
+		endPosition.setBounds(50,380,200,40);
+		gpsEnd.setBounds(300,380,200,40);
+		speedTypeLabel.setBounds(50,420,200,40);
+		speedTypeField.setBounds(300,420,200,40);
+		curveTypeJLabel.setBounds(50,460,200,40);
+		curveTypeField.setBounds(300,460,200,40);
+		
 
 		mainWindow.add(startButton);
 		mainWindow.add(resetButton);
@@ -54,6 +78,18 @@ public class UIDesign {
 		mainWindow.add(linearValues);
 		mainWindow.add(curvePrompt);
 		mainWindow.add(curveDetection);
+		mainWindow.add(lastCurve);
+		mainWindow.add(averageSpeed);
+		mainWindow.add(gpsStart);
+		mainWindow.add(gpsEnd);
+		mainWindow.add(avgSpeedLabel);
+		mainWindow.add(startPosition);
+		mainWindow.add(endPosition);
+		mainWindow.add(speedTypeLabel);
+		mainWindow.add(speedTypeField);
+		mainWindow.add(curveTypeJLabel);
+		mainWindow.add(curveTypeField);
+		
 		mainWindow.setSize(800, 500);
 		mainWindow.setLayout(null);
 		mainWindow.setVisible(true);
@@ -99,12 +135,20 @@ public class UIDesign {
 								String speed = finalData.getCurveData().get(0).isspeedflag() == true ? "High Speed" : "Low Speed";
 								if(finalData.getCurveData().get(0).isDirection() == true) {
 									curvePrompt.setText(speed+" Left Curve Detected!!");
-									finalData.getCurveData().remove(0);
 								}
 								else {
 									curvePrompt.setText(speed+" Right Curve Detected!!");
-									finalData.getCurveData().remove(0);
 								}
+							}
+							if(finalData.getCurveData().get(0).getTimeOffsetEnd().equals(offsetFromLinear[0])) {
+								curvePrompt.setText("");
+								averageSpeed.setText(finalData.getCurveData().get(0).getAverageVehicleSpeed());
+								gpsStart.setText(finalData.getCurveData().get(0).getGpsLatLongStart());
+								gpsEnd.setText(finalData.getCurveData().get(0).getGpsLatLongEnd());
+								curveTypeField.setText(finalData.getCurveData().get(0).isDirection() == true ? "Left" : "Right");
+								speedTypeField.setText(finalData.getCurveData().get(0).isspeedflag() == true ? "High Speed" : "Low Speed");
+								finalData.getCurveData().remove(0);
+								
 							}
 							Thread.sleep(1);
 						}
