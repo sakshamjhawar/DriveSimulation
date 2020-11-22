@@ -29,8 +29,8 @@ public class Parser {
 		sortTheListAsPerTime();
 		//displaying the data and writing it to output file
 //		displayData();
-		UIDesign graphicalInterface = new UIDesign();
-		graphicalInterface.display();
+//		UIDesign graphicalInterface = new UIDesign();
+//		graphicalInterface.display();
 		return dataArray;
 	}
 	

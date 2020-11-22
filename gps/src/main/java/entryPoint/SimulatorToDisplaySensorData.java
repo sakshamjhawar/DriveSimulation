@@ -1,5 +1,6 @@
 package entryPoint;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SimulatorToDisplaySensorData {
@@ -14,15 +15,38 @@ public class SimulatorToDisplaySensorData {
 	
 	public void displaySensorInformation(List<SensorObj> dataArray) {
 		
-		System.out.println("Current Time"+"\t"+"Vehicle Speed"+"\t"+"SteerAngle"+
-				"\t"+"YawRate"+"\t"+"LatAccel"+"\t"+"LongAccel"+"\t"+"GPS Lat/Long");
+		int flag = 0;
+		System.out.println("CurrentTime"+"\t"+"VehicleSpeed"+"\t"+"SteerAngle"+
+				"\t"+"YawRate"+"\t\t"+"LatAccel"+"\t"+"LongAccel"+"\t"+"GPS Lat/Long");
 		for(SensorObj obj : dataArray) {
 			currentTime = obj.getTimeOffset();
 			if(obj.getType().equals("Displa vehicle speed(km/hr): ")) {
 				vehicleSpeed = obj.getValue();
 			}
 			if(obj.getType().equals("Steering wheel angle(degrees): ")) {
-				steerAngle = obj.getValue();
+				
+				String newValue = obj.getValue();
+				
+				Float newValueOfSteerAngle = Float.parseFloat(newValue);
+//				Float oldValueOfSteerAngle = steerAngle.equals("-") ? newValueOfSteerAngle : Float.parseFloat(steerAngle);
+				
+				if(newValueOfSteerAngle > 9 && flag == 0) {
+					flag = 1;
+					System.out.println("Right turn Started"+"||"+currentTime+"||"+newValueOfSteerAngle);
+				}
+				if(flag == 1 && newValueOfSteerAngle < 9) {
+					flag = 0;
+					System.out.println("Right turn Ended"+"||"+currentTime+"||"+newValueOfSteerAngle);
+				}
+				if(newValueOfSteerAngle < -9 && flag == 0) {
+					flag = -1;
+					System.out.println("left turn Started"+"||"+currentTime+"||"+newValueOfSteerAngle);
+				}
+				if(flag == -1 && newValueOfSteerAngle > -9) {
+					flag = 0;
+					System.out.println("left turn Ended"+"||"+currentTime+"||"+newValueOfSteerAngle);
+				}
+				steerAngle = newValue;
 			}
 			if(obj.getType().equals("Vehicle yaw rate(degree/sec):  ")) {
 				yawRate = obj.getValue();
@@ -36,9 +60,11 @@ public class SimulatorToDisplaySensorData {
 			if(obj.getType().equals("GPS data(Latitude:Longitude)")) {
 				gpsLatLong = obj.getValue();
 			}
-			System.out.println(currentTime+"\t"+vehicleSpeed+"\t"+steerAngle+
-					"\t"+yawRate+"\t"+latAccel+"\t"+longAccel+"\t"+gpsLatLong+"\r");
-			System.out.print("\r");
+
+//			System.out.print(currentTime+"\t\t"+vehicleSpeed+"\t\t"+steerAngle+
+//					"\t\t"+yawRate+"\t"+latAccel+"\t"+longAccel+"\t"+gpsLatLong+"\r");
+			
+			
 		}
 	}
 }
