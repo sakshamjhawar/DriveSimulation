@@ -3,6 +3,7 @@ package entryPoint;
 public class CurveInfo {
 	
 	private String timeOffset;
+	private String timeOffsetEnd;
 	private String averageVehicleSpeed;
 	private String gpsLatLongStart;
 	private String gpsLatLongEnd;
@@ -59,6 +60,14 @@ public class CurveInfo {
 
 	public void setspeedflag(boolean speed) {
 		this.speedflag = speed;
+	}
+
+	public String getTimeOffsetEnd() {
+		return timeOffsetEnd;
+	}
+
+	public void setTimeOffsetEnd(String timeOffsetEnd) {
+		this.timeOffsetEnd = timeOffsetEnd;
 	}
 	
 	
