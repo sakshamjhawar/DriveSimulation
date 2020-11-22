@@ -23,7 +23,9 @@ public class EntryPointProgram {
 
 		List<SensorObj> dataArray = parse.inputFiles(canMessages, gpsTrack);
 		SimulatorToDisplaySensorData simulatorToDisplaySensorData = new SimulatorToDisplaySensorData();
-		simulatorToDisplaySensorData.displaySensorInformation(dataArray);
+		CurveSensorPojo finalData = simulatorToDisplaySensorData.displaySensorInformation(dataArray);
+		UIDesign graphicalInterface = new UIDesign();
+		graphicalInterface.display(finalData);
 //		System.out.println(canMessages);
 //		System.out.println(gpsTrack);
 	}
